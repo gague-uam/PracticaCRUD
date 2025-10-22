@@ -52,12 +52,22 @@ public class MyDao implements ICRUD {
         finally {
             em.close();
         }
-
     }
 
     @Override
     public <T> void delete(T entity) {
-
+        EntityManager em = JPAConexion.getEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.remove(em.merge(entity));
+            em.getTransaction().commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
+        }
     }
 
     @Override
