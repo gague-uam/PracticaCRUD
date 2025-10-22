@@ -72,6 +72,12 @@ public class MyDao implements ICRUD {
 
     @Override
     public <T> T findById(Integer id, Class<T> clazz) {
+        EntityManager em = JPAConexion.getEntityManager();
+        try{
+            T entity = em.find(clazz, id);
+            return entity;
+        }catch(Exception ex){ex.printStackTrace();}
+        finally {em.close();}
         return null;
     }
 }
