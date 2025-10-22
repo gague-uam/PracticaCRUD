@@ -41,4 +41,13 @@ public class Main {
         a = dao.findById(2, Autor.class);
         dao.delete(a);
     }
+
+    public static void main(String[] args) {
+        insertarAutor();
+        listarAutores();
+        editarAutor();
+        listarAutores();
+        eliminarAutor();
+        listarAutores();
+    }
 }
