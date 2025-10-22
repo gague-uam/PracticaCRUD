@@ -36,11 +36,22 @@ public class MyDao implements ICRUD {
         finally {
             em.close();
         }
-
     }
 
     @Override
     public <T> void update(T entity) {
+        EntityManager em = JPAConexion.getEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
+        }
 
     }
 
